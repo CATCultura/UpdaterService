@@ -6,6 +6,21 @@ api_secret_key = '1q9kvz2crlrewjyo7zthdw8s4cj0y8nwpv6f06egz2dwnicy4r'
 app_token = 'bWRtKZKzi72eqCjSU6kWK9iSm'
 client = Socrata('analisi.transparenciacatalunya.cat', app_token=app_token)
 
-results = client.get("rhpv-yr4f",limit = 65000)
+index = 0
+batch_size = 5
+
+results = client.get("rhpv-yr4f", offset=index, limit=batch_size)
+result_len = len(results)
 results_df = pd.DataFrame.from_records(results)
+
+index += batch_size
+
+while result_len != 0 and index < 15:
+    results = client.get("rhpv-yr4f", offset=index, limit=batch_size)
+    frame = [results_df, pd.DataFrame.from_records(results)]
+    results_df = pd.concat(frame)
+    index += batch_size
+    result_len = len(results)
+
+
 print(results_df.info())

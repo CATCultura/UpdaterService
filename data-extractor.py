@@ -1,16 +1,8 @@
-from datetime import date, datetime
+from datetime import datetime
 
 import dateutil
 import pandas as pd
-import csv
 
-
-# csv_reader = csv.reader(open('Agenda_cultural_de_Catalunya__per_localitzacions_.csv', 'r', encoding='utf-8'))
-#
-# header = next(csv_reader)
-# data = []
-# for line in csv_reader:
-#     data.append(line)
 
 def converter(date_time):
     try:
