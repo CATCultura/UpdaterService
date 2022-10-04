@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 
 import dateutil
+import pandas as pd
 
 
 def converter(date_time):
@@ -41,6 +42,7 @@ for j, record in enumerate(data['data']):
             temp_record[column] = record[i]
     clean_data.append(temp_record)
 
-with open('cleaned_data.json', 'w', encoding='utf-8') as file:
+
+with open('cleaned_data.json', 'w', encoding='ascii') as file:
     info = json.dumps(clean_data, indent=4)
     print(info,file=file)
