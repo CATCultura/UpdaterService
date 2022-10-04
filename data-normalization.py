@@ -26,16 +26,16 @@ clean_data = []
 for j, record in enumerate(data['data']):
     temp_record = {}
     for i, column in enumerate(headers):
-        if "Data" in column or "Dataf" in column:
+        if "data" in column:
             temp_record[column] = str(converter(record[i]))
 
-        elif 'Tags' in column:
+        elif 'tags' in column:
             if record[i] is not None:
                 tags = record[i].split(',')
                 new_tags = []
                 for tag in tags:
                     new_tags.append(tag.split('/')[1])
-                temp_record[column] = ','.join(new_tags)
+                temp_record[column] = new_tags
             else:
                 temp_record[column] = None
         else:
@@ -45,4 +45,4 @@ for j, record in enumerate(data['data']):
 
 with open('cleaned_data.json', 'w', encoding='ascii') as file:
     info = json.dumps(clean_data, indent=4)
-    print(info,file=file)
+    print(info, file=file)
