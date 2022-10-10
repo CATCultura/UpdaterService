@@ -1,4 +1,4 @@
-from config.settings import DS_TO_S_KEY_MAPPING
+from service.config.settings import DS_TO_S_KEY_MAPPING
 
 
 class DataCleaner:
