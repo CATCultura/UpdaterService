@@ -18,7 +18,7 @@ def converter(date_time):
             return dateutil.parser.parse('01/01/1900 12:00:00 AM')
 
 
-file = open('test.json', 'r', encoding='utf-8')
+file = open('../test.json', 'r', encoding='utf-8')
 data = json.load(file)
 
 headers = data['columns']
@@ -43,6 +43,6 @@ for j, record in enumerate(data['data']):
     clean_data.append(temp_record)
 
 
-with open('cleaned_data.json', 'w', encoding='ascii') as file:
+with open('../cleaned_data.json', 'w', encoding='ascii') as file:
     info = json.dumps(clean_data, indent=4)
     print(info, file=file)

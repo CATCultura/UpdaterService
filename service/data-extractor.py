@@ -13,7 +13,7 @@ def converter(date_time):
         return dateutil.parser.parse('01/01/1900 12:00:00 AM')
 
 
-df = pd.read_csv('Agenda_cultural_de_Catalunya__per_localitzacions_.csv', low_memory=False)
+df = pd.read_csv('../Agenda_cultural_de_Catalunya__per_localitzacions_.csv', low_memory=False)
 
 rename = {}
 for column in df.columns:
@@ -27,8 +27,8 @@ df['data_fi'] = df['data_fi'].apply(converter)
 
 new_df = df[df.data_fi > today]
 
-with open('test.csv', 'w', encoding='utf-8') as file:
+with open('../test.csv', 'w', encoding='utf-8') as file:
     new_df.to_csv(file, index=False)
 
-with open('test.json', 'w', encoding='utf-8') as file:
+with open('../test.json', 'w', encoding='utf-8') as file:
     new_df.to_json(file, orient='split', indent=4, index=False)
