@@ -28,5 +28,5 @@ class DataCleaner:
     @staticmethod
     def filter_data_by(new_data: list, old_data: list, fields: list) -> list:
         already_present = [(str(record['codi']), record['denominacio']) for record in old_data]
-        to_return = [record for record in new_data if (record['codi'], record['denominacio']) not in already_present]
+        to_return = [record for record in new_data if (str(record['codi']), record['denominacio']) not in already_present]
         return to_return
