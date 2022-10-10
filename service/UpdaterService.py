@@ -18,18 +18,19 @@ class UpdaterService:
         self.repo = PersistenceManager()
         self.cleaner = DataCleaner()
 
-    def get_events(self, from_date=None):
+    def get_events(self, from_date=None, limit=5000):
         today = dateutil.utils.today()
         str_today = today.strftime('%Y-%m-%dT%H:%M:%S')
         if not from_date:
             req = requests.get(
-                self.url + '?$limit=5&$where=date_trunc_ymd(data_fi) >= date_trunc_ymd(\'' + str_today + '\')')
+                 f'{self.url}?$limit={limit}&$where=date_trunc_ymd(data_fi) >= date_trunc_ymd(\'{str_today}\')'
+            )
             data = json.loads(req.text)
             date_modified = parse(req.headers.get('Last-Modified'))
             if date_modified.replace(tzinfo=None) <= self.last_modified_date:
                 return None
             else:
-                self.last_modified_date = date_modified.replace(tzinfo=None)
+                # self.last_modified_date = date_modified.replace(tzinfo=None)
                 current = self.repo.get_current_data()
                 cleaned_data = self.cleaner.clean_data(data)
                 to_send = self.cleaner.filter_data_by(cleaned_data, current, [])
