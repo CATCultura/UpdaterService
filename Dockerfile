@@ -6,6 +6,6 @@ WORKDIR /service
 
 RUN pip install -r requirements.txt
 
-RUN flask --app UpdateServiceController run
+CMD ['flask --app UpdateServiceController run']
 
 
