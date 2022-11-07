@@ -31,4 +31,8 @@ DS_TO_S_KEY_MAPPING = {
 }
 
 GEO_KEYS = ["regioOPais", "espai", "comarcaIMunicipi", "localitat", "adreca"]
+
 REDUNDANT_KEYS = ['descripcioHtml']
+
+PRIMARY_KEY = ['denominacio', 'ubicacio', 'dataInici', 'adreca', 'espai']
+

@@ -70,7 +70,7 @@ class TestDataCleaner(TestCase):
                 'denominacio': 'ous dusos'
             }
         ]
-        filtered_data = DataCleaner.filter_data_by(new_data, old_data, [])
+        filtered_data = DataCleaner.filter_data_by(new_data, old_data, ['codi'])
         self.assertListEqual(filtered_data, [{'codi': 9012, 'denominacio': 'ous estrellats'}])
 
     def test_filter_data_by_diff_keys(self):
@@ -99,7 +99,7 @@ class TestDataCleaner(TestCase):
                 'denominacio': 'ous dusos'
             }
         ]
-        filtered_data = DataCleaner.filter_data_by(new_data, old_data, [])
+        filtered_data = DataCleaner.filter_data_by(new_data, old_data, ['codi', 'denominacio'])
         expected = [
             {'codi': 5678, 'denominacio': 'ous durs'},
             {'codi': 9012, 'denominacio': 'ous estrellats'}
@@ -141,7 +141,7 @@ class TestDataCleaner(TestCase):
                 'denominacio': 'ous secs'
             }
         ]
-        filtered_data = DataCleaner.filter_data_by(new_data, old_data, [])
+        filtered_data = DataCleaner.filter_data_by(new_data, old_data, ['codi'])
         expected = [
             {'codi': 9012, 'denominacio': 'ous estrellats'}
 

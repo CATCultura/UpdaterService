@@ -17,3 +17,9 @@ class PersistenceManager:
             data = json.load(file)
 
         return data
+
+    def save(self, data: list):
+        c_data = self.get_current_data()
+        new_data = c_data + data
+        with open(f'{self.path}current_data.json', 'w', encoding='utf-8') as file:
+            print(json.dumps(new_data), file=file)

@@ -33,5 +33,5 @@ class UpdaterService:
                 # self.last_modified_date = date_modified.replace(tzinfo=None)
                 current = self.repo.get_current_data()
                 cleaned_data = self.cleaner.clean_data(data)
-                to_send = self.cleaner.filter_data_by(cleaned_data, current, [])
+                to_send = self.cleaner.filter_data_by(cleaned_data, current)
                 return to_send

@@ -1,6 +1,6 @@
 from typing import Tuple
 
-from service.config.settings import DS_TO_S_KEY_MAPPING, GEO_KEYS, REDUNDANT_KEYS
+from service.config.settings import DS_TO_S_KEY_MAPPING, GEO_KEYS, REDUNDANT_KEYS, PRIMARY_KEY
 
 
 class DataCleaner:
@@ -37,10 +37,10 @@ class DataCleaner:
         return clean_data
 
     @staticmethod
-    def filter_data_by(new_data: list, old_data: list, fields: list) -> list:
-        already_present = [(str(record['codi']), record['denominacio']) for record in old_data]
+    def filter_data_by(new_data: list, old_data: list, unique_key: list = PRIMARY_KEY) -> list:
+        already_present = [DataCleaner.get_primary_key(record, unique_key) for record in old_data]
         to_return = [record for record in new_data if
-                     (str(record['codi']), record['denominacio']) not in already_present]
+                     DataCleaner.get_primary_key(record, unique_key) not in already_present]
         return to_return
 
     @staticmethod
@@ -115,3 +115,14 @@ class DataCleaner:
 
         return final_data
 
+    @staticmethod
+    def get_primary_key(record, keys):
+        result = []
+        for _key in keys:
+            aux = ''
+            try:
+                aux = record[_key]
+            except KeyError:
+                aux = ''
+            result.append(aux)
+        return result
