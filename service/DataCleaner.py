@@ -27,6 +27,8 @@ class DataCleaner:
                 new_field = DS_TO_S_KEY_MAPPING[field]
                 if 'tags' in field:
                     temp_record[new_field] = DataCleaner.treat_tags(record[field])
+                elif 'imatges' in field:
+                    temp_record[new_field] = record[field].split(',')
                 elif 'comarca' in field:
                     temp_record[new_field] = DataCleaner.clean_location(record[field])
                 else:
