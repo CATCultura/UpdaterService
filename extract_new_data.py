@@ -13,6 +13,6 @@ req = requests.get(
     f'{url}?$limit=5000&$where=date_trunc_ymd(data_fi) >= date_trunc_ymd(\'{str_today}\')'
 )
 data = json.loads(req.text)
-with open('service/Persistence/current_data.json', 'w', encoding='utf-8') as file:
+with open('service/Persistence/current_data_test.json', 'w', encoding='utf-8') as file:
     cleaned = DataCleaner.clean_data(data)
     print(json.dumps(cleaned, indent=4), file=file)

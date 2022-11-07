@@ -29,3 +29,6 @@ DS_TO_S_KEY_MAPPING = {
     'imgapp': 'imgApp',
     'descripcio_html': 'descripcioHtml'
 }
+
+GEO_KEYS = ["regioOPais", "espai", "comarcaIMunicipi", "localitat", "adreca"]
+REDUNDANT_KEYS = ['descripcioHtml']
