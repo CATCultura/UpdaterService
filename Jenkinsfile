@@ -10,9 +10,8 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                //sh 'sudo docker kill $(sudo docker ps -q)'
-                //sh 'sudo docker rmi backend -f'
-
+                sh 'sudo docker kill $(sudo docker ps -q -f ancestor=dataset-retrieval-service)'
+                sh 'sudo docker rmi dataset-retrieval-service -f'
                 sh 'sudo docker build -t dataset-retrieval-service .'
                 sh 'sudo docker run -d -p 50001:5001 dataset-retrieval-service'
             }

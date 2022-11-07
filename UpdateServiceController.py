@@ -29,4 +29,4 @@ def get_all():
     return json.dumps(data, indent=4)
 
 
-app.run(port=5001)
+app.run(port=5001, host='0.0.0.0')
