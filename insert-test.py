@@ -60,9 +60,9 @@ for item in data:
 # print(unique_events)
 
 
-# url = "http://10.4.41.41:8081/event"
+url = "http://10.4.41.41:8081/events"
 
-url = "http://192.168.1.156:8081/event"
+# url = "http://192.168.1.156:8081/event"
 count = 0
 failed = 0
 
@@ -76,8 +76,9 @@ for event in events_to_insert:
         print(event['horari'])
 
 total = len(events_to_insert)
+print(f'totalevents = {total}')
 for event in events_to_insert:
-    req = requests.post(url, json=event)
+    req = requests.post(url, json=[event])
     count += 1
     if count % 100 == 0:
         print(count)
