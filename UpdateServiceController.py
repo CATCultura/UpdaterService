@@ -25,10 +25,13 @@ def update():
     json_string = json.dumps(data, indent=4)
     args = request.args.to_dict()
     save = True if args.get('save') == 'true' else False
+    update_db = True if args.get('update') == 'true' else False
     if save:
         persistence_service.save(data)
     headers = {'auth-token': 'my-hash'}
-    req = requests.post(f'{remote_url}insert', json=data, headers=headers)
+    if update_db:
+        req = requests.post(f'{remote_url}insert', json=data, headers=headers)
+
     return json_string
 
 
