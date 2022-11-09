@@ -3,12 +3,13 @@ from datetime import date, datetime
 
 import flask
 import requests
+from flask import request
 
 from service.Persistence.PersistenceManager import PersistenceManager
 from service.PersistenceService import PersistenceService
 from service.UpdaterService import UpdaterService
 
-url = 'http://10.4.41.41:8081/'
+remote_url = 'http://10.4.41.41:8081/'
 
 last_date = datetime.strptime('2022/10/9', '%Y/%m/%d')
 updater_service = UpdaterService(last_date)
@@ -22,8 +23,12 @@ app.config['DEBUG'] = True
 def update():
     data = updater_service.get_events()
     json_string = json.dumps(data, indent=4)
-    persistence_service.save(data)
-    # req = requests.post(f'{url}update-events')
+    args = request.args.to_dict()
+    save = True if args.get('save') == 'true' else False
+    if save:
+        persistence_service.save(data)
+    headers = {'auth-token': 'my-hash'}
+    req = requests.post(f'{remote_url}insert', json=data, headers=headers)
     return json_string
 
 
