@@ -13,7 +13,7 @@ pipeline {
                 sh 'sudo docker kill $(sudo docker ps -q -f ancestor=dataset-retrieval-service)'
                 sh 'sudo docker rmi dataset-retrieval-service -f'
                 sh 'sudo docker build -t dataset-retrieval-service .'
-                sh 'sudo docker run -d -p 5001:5001 -v dataset-json-repo:/py-service/service/Persistence dataset-retrieval-service'
+                sh 'sudo docker run -d -p 5001:5001 -v dataset-json-repo:/py-service/data dataset-retrieval-service'
             }
         }
 

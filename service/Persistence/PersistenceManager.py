@@ -6,7 +6,7 @@ class PersistenceManager:
 
     def __init__(self, path: str = ""):
         if not path:
-            temp = f'{os.getcwd()}{os.sep}service{os.sep}Persistence{os.sep}'
+            temp = f'{os.getcwd()}{os.sep}data{os.sep}'
             self.path = temp
         else:
             self.path = path

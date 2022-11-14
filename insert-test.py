@@ -33,7 +33,7 @@ def check_connection(check: dict, graph: dict, entry_point: int) -> bool:
 
 
 #
-file = open('service/Persistence/current_data.json', 'r', encoding='utf-8')
+file = open('data/current_data.json', 'r', encoding='utf-8')
 
 data = json.load(file)
 
