@@ -41,3 +41,5 @@ REDUNDANT_KEYS = ['descripcioHtml']
 
 PRIMARY_KEY = ['denominacio', 'ubicacio', 'dataInici', 'adreca', 'espai']
 
+DATE_QUERY = '?$limit={}&$where=date_trunc_ymd(data_fi) >= date_trunc_ymd(\'{}\')'
+
