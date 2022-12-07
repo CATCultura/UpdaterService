@@ -1,5 +1,6 @@
 import json
 import random
+from base64 import b64encode
 from collections import deque
 
 import requests
@@ -10,6 +11,11 @@ def generate_list(id: int, ids: list) -> list:
     if id in aux:
         aux.remove(id)
     return aux
+
+
+def basic_auth(username, password):
+    token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
+    return f'Basic {token}'
 
 
 def check_connection(check: dict, graph: dict, entry_point: int) -> bool:
@@ -60,7 +66,7 @@ for item in data:
 # print(unique_events)
 
 
-url = "http://10.4.41.41:8081/events"
+url = "http://192.168.1.156:8081/insert"
 
 # url = "http://192.168.1.156:8081/event"
 count = 0
@@ -77,12 +83,16 @@ for event in events_to_insert:
 
 total = len(events_to_insert)
 print(f'totalevents = {total}')
+headers = {
+    'Authorization': basic_auth('service', 'service'),
+    'auth-token': 'my-hash'
+}
 for event in events_to_insert:
-    req = requests.post(url, json=[event])
+    req = requests.post(url, json=[event], headers=headers)
     count += 1
     if count % 100 == 0:
         print(count)
-        print(f'{100*count/total}% completed')
+        print(f'{100 * count / total}% completed')
     if req.status_code != 200 and req.status_code != 201:
         failed += 1
         if failed % 10 == 0:
