@@ -66,9 +66,11 @@ for item in data:
 # print(unique_events)
 
 
-url = "http://192.168.1.156:8081/insert"
+# url = "http://192.168.1.156:8081/insert"
 
 # url = "http://192.168.1.156:8081/event"
+
+url = "http://10.4.41.41:8081/insert"
 count = 0
 failed = 0
 

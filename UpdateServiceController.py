@@ -1,4 +1,5 @@
 import json
+from base64 import b64encode
 from datetime import date, datetime
 
 import flask
@@ -19,6 +20,11 @@ app = flask.Flask(__name__)
 app.config['DEBUG'] = True
 
 
+def basic_auth(username, password):
+    token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
+    return f'Basic {token}'
+
+
 @app.route("/update", methods=['GET'])
 def update():
     data = updater_service.get_events()
@@ -28,8 +34,10 @@ def update():
     update_db = True if args.get('update') == 'true' else False
     if save:
         persistence_service.save(data)
-    headers = {'auth-token': 'my-hash'}
     if update_db:
+        headers = {
+            'Authorization': basic_auth('service', 'service')
+        }
         req = requests.post(f'{remote_url}insert', json=data, headers=headers)
 
     return json_string
