@@ -108,11 +108,13 @@ class DataCleaner:
         final_data = []
         for data_piece in cleaned_data:
             for redundant_key in REDUNDANT_KEYS:
-                data_piece.pop(redundant_key)
+                try:
+                    data_piece.pop(redundant_key)
+                except KeyError:
+                    print(f'missing {redundant_key}')
             res, rem = DataCleaner.extract_remaining_information(data_piece, GEO_KEYS)
             location_data = DataCleaner.merge_geoinformation(rem)
             final_data.append({**res, **location_data})
-
         return final_data
 
     @staticmethod

@@ -18,6 +18,7 @@ pipeline {
         }
 
         stage('Deploy') {
+        when {branch 'dev-service'}
             steps {
                 sh 'sudo docker kill $(sudo docker ps -q -f ancestor=dataset-retrieval-service)'
                 sh 'sudo docker rmi dataset-retrieval-service -f'
