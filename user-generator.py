@@ -28,6 +28,7 @@ for i in range(100):
     username = f'{name[0:first]}{surname[0:second]}'
     user['username'] = username
     user['email'] = f'{username}@example.com'
+    user['password'] = '1234'
     users.append(user)
 
 with open('users.json', 'w', encoding='utf8') as file:
