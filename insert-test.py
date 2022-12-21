@@ -70,7 +70,7 @@ for item in data:
 
 # url = "http://192.168.1.156:8081/event"
 
-url = "http://10.4.41.41:8081/insert"
+url = "http://40.113.160.200:8081/insert"
 count = 0
 failed = 0
 
@@ -86,8 +86,7 @@ for event in events_to_insert:
 total = len(events_to_insert)
 print(f'totalevents = {total}')
 headers = {
-    'Authorization': basic_auth('service', 'service'),
-    'auth-token': 'my-hash'
+    'Authorization': basic_auth('admin', 'admin')
 }
 for event in events_to_insert:
     req = requests.post(url, json=[event], headers=headers)

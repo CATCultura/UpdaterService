@@ -11,6 +11,7 @@ from service.PersistenceService import PersistenceService
 from service.UpdaterService import UpdaterService
 
 remote_url = 'http://10.4.41.41:8081/'
+remote_azure_url = 'http://40.113.160.200:8081/'
 
 last_date = datetime.strptime('2022/10/9', '%Y/%m/%d')
 updater_service = UpdaterService(last_date)
@@ -36,9 +37,10 @@ def update():
         persistence_service.save(data)
     if update_db:
         headers = {
-            'Authorization': basic_auth('service', 'service')
+            'Authorization': basic_auth('admin', 'admin')
         }
         req = requests.post(f'{remote_url}insert', json=data, headers=headers)
+        req2 = requests.post(f'{remote_azure_url}insert', json=data, headers=headers)
 
     return json_string
 
