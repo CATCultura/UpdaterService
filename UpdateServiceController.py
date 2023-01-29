@@ -10,8 +10,9 @@ from service.Persistence.PersistenceManager import PersistenceManager
 from service.PersistenceService import PersistenceService
 from service.UpdaterService import UpdaterService
 
-remote_url = 'http://10.4.41.41:8081/'
-remote_azure_url = 'http://40.113.160.200:8081/'
+# insert urls
+remote_url = '**************'
+remote_azure_url = '***********'
 
 last_date = datetime.strptime('2022/10/9', '%Y/%m/%d')
 updater_service = UpdaterService(last_date)

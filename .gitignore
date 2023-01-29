@@ -4,3 +4,4 @@ Agenda_cultural_de_Catalunya__per_localitzacions_.csv
 /service/data-extractor.py
 /service/data-normalization.py
 endpoint_test.py
+/misc/
